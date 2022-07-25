@@ -1,0 +1,19 @@
+{
+  "name": "begm",
+  "version": "1.0.0",
+  "description": "Backend server for gyelopzhing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "jigmetharchen@dhi.bt",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.4",
+    "mqtt": "^4.3.7",
+    "nodemon": "^2.0.19"
+  }
+}
