@@ -9,21 +9,9 @@ const levelSchema = new Mongoose.Schema({
         type:String,
         required: true,
     },
-    flow_name:{
+    level_name:{
         type:String,
 
-    },
-    flow_rate:{
-        type: String,
-        required: true,
-    },
-    total_flow:{
-        type:String,
-        required:true,
-    },
-    voltage:{
-        type:String,
-        required:true,
     },
     level:{
         type:String,

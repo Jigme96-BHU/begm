@@ -1,6 +1,6 @@
 const Mongoose = require("mongoose");
 
-const nodeOneSchema = new Mongoose.Schema({
+const flowSchema = new Mongoose.Schema({
     node_name:{
         type: String,
         required: true,
@@ -29,5 +29,5 @@ const nodeOneSchema = new Mongoose.Schema({
     timestamps: true
 });
 
-module.exports = Mongoose.model("nodeOne", nodeOneSchema);
+module.exports = Mongoose.model("flow", flowSchema);
 

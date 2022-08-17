@@ -1,7 +1,7 @@
 // const mongoClient = require('mongodb').mongoClient;
 const Mongoose = require("mongoose");
 // const assert = require('assert');
-const localDB = `mongodb://127.0.0.1:27017/gyelopzhing`;
+const localDB = `mongodb://127.0.0.1:27017/gyelpozhing`;
 // const dbname = 'gyelopzhing';
 
 const connectDB = async () => {

@@ -1,5 +1,5 @@
 const client = require("../server_conn/mqtt");
-const nodeOne = require("../schema/node");
+const flow = require("../schema/flow");
 const level = require("../schema/level");  
 
 client.subscribe("GCIT/FLOWDATA");
@@ -8,10 +8,11 @@ const mqttdata = async () => {
 
     await client.on('message',(topic,message)=>{
         try {
+
             data = JSON.parse(message);
             for (let i = 0; i < data.doc_num; i++) {
                 var node_data = data[`doc_${i+1}`];
-                nodeOne.create(
+                flow.create(
                 node_data,
             );
             };

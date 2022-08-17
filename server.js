@@ -15,8 +15,8 @@ client.on('connect',()=>{
     console.log("MQTT Broker Connected");
 
 });
-client.on('error',()=>{
-    console.log('Error connecting to MQTT Broker');
+client.on('error',(err)=>{
+    console.log('Error connecting to MQTT Broker'+ err);
 });
 
 

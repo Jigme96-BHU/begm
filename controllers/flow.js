@@ -1,17 +1,22 @@
 const mongodb = require("../server_conn/db");
-const nodeOne = require("../schema/node");
+const flow = require("../schema/flow");
 const level = require("../schema/level");
 
 exports.flowid = async(req,res) =>{
     try {
         const id = req.params.id;
-        const data = await nodeOne.find({$or:[{"flow_name":id},{"node_name":id}]});
-        const data1 = await level.find({$or:[{"flow_name":id},{"node_name":id}]});
-        if(data.length){
-            res.status(200).json(data);
-        }else{
-            res.status(200).json(data1);
-        } 
+        console.log(id);
+        const data = await flow.find({$or:[{"flow_name":id},{"node_name":id}]});
+        res.status(200).json(data);
+    } catch (error) {
+        console.log(error);   
+    }
+}
+exports.levelid = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        const data = await level.find({$or:[{"level_name":id},{"node_name":id}]});
+        res.status(200).json(data);
     } catch (error) {
         console.log(error);   
     }
