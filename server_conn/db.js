@@ -1,15 +1,16 @@
 // const mongoClient = require('mongodb').mongoClient;
 const Mongoose = require("mongoose");
 // const assert = require('assert');
-const localDB = `mongodb://127.0.0.1:27017/gyelpozhing`;
+// const localDB = `mongodb://127.0.0.1:27017/gyelpozhing`;
 // const dbname = 'gyelopzhing';
 
 const connectDB = async () => {
-    await Mongoose.connect(localDB,{
+    await Mongoose.connect(process.env.MONGO_URL,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    });
-    console.log("Databased Connected");
+    })
+    .then(()=> console.log("Databased Connected"))
+    .catch(err=>console.log(err));
 
 };
 module.exports = connectDB;
