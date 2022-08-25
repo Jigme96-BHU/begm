@@ -4,7 +4,9 @@ const flow = require("../schema/flow");
 
 exports.flowlog = async(req,res) =>{
     try {
+        
         const id = req.params.id;
+
         if (id === 'today'){
 
             const dailydata  = await flow.aggregate(

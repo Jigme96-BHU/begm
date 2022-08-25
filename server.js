@@ -5,9 +5,15 @@ const mongodb = require("./server_conn/db");
 const client = require("./server_conn/mqtt");
 const mqttdata = require("./subscribe/data");
 const app = express();
-dotenv.config({ path: './.env'});
+const server = require('http').createServer(app);
 
+app.io = require('socket.io')(server,{cors:{origin:"*"}});
+require('./scoketdata/alarm')(app)
+
+dotenv.config({ path: './.env'});
 const port = process.env.PORT;
+
+app.use(express.static(path.join(__dirname,'views')));
 
 mongodb();
 
@@ -15,16 +21,20 @@ client.on('connect',()=>{
     console.log("MQTT Broker Connected");
 
 });
+
 client.on('error',(err)=>{
     console.log('Error connecting to MQTT Broker'+ err);
 });
 
-
 mqttdata();
 
-//define routes
 app.use('/data', require('./routes/auth'));
 
-app.listen(port,()=>{
+app.get('/',(req,res)=>{
+    res.render("./views/index.html");
+})
+server.listen(port,()=>{
     console.log(`Server started on port ${port}`)
 });
+
+
