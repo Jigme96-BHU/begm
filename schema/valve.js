@@ -9,11 +9,15 @@ const valveSchema = new Mongoose.Schema({
         type:String,
 
     },
-    valve_percentage:{
+    valve_percent:{
         type: String,
         required: true,
     },
     valve_status:{
+        type:String,
+        required:true,
+    },
+    date:{
         type:String,
         required:true,
     },

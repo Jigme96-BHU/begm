@@ -7,23 +7,25 @@ exports.flowlog = async(req,res) =>{
         
         const id = req.params.id;
 
-        if (id === 'today'){
+        if (id === 'weekly'){
 
-            const dailydata  = await flow.aggregate(
+            const date = req.body.date;
+
+            const weekData  = await flow.aggregate(
                 [{
                     $match:{
                         $expr:{
-                            $eq:[{$dayOfMonth: '$createdAt'},{$dayOfMonth: new Date()}],
+                            $eq:[{$dayOfWeek: '$createdAt'},{$dayOfWeek: new Date()}],
                         },
                     }
                 }])
-            res.status(200).json(dailydata);
+            res.status(200).json(weekData);
 
         }else if( id === 'anyday'){
-           
-            const date = '2022-08-15'
 
-            const anyDayData = await node.aggregate([
+            const date = req.body.date
+
+            const anyDayData = await flow.aggregate([
                 {
                     $match:{
                         $expr:{
@@ -37,13 +39,13 @@ exports.flowlog = async(req,res) =>{
 
         }else if(id ==='month'){
 
-            const month = '2022-07-19'
+            const date = req.body.date
 
-            const anyMonthData = await node.aggregate([
+            const anyMonthData = await flow.aggregate([
                 {
                     $match:{
                         $expr:{
-                            $eq:[{$month:'$createdAt'},{$month: new Date(`${month}`)}],
+                            $eq:[{$month:'$createdAt'},{$month: new Date(`${date}`)}],
                         },
                     }
                 }
@@ -61,22 +63,24 @@ exports.flowlog = async(req,res) =>{
 exports.levellog = async(req,res) =>{
     try {
         const id = req.params.id;
-        console.log(id)
-        if (id === 'today'){
 
-            const dailydata  = await level.aggregate(
+        if (id === 'weekly'){
+
+            const date = req.body.date
+
+            const weeklydata  = await level.aggregate(
                 [{
                     $match:{
                         $expr:{
-                            $eq:[{$dayOfMonth: '$createdAt'},{$dayOfMonth: new Date()}],
+                            $eq:[{$dayOfWeek: '$createdAt'},{$dayOfWeek: new Date()}],
                         },
                     }
                 }])
-            res.status(200).json(dailydata);
+            res.status(200).json(weeklydata);
 
         }else if( id === 'anyday'){
            
-            const date = '2022-08-15'
+            const date = req.body.date
 
             const anyDayData = await level.aggregate([
                 {
@@ -92,7 +96,7 @@ exports.levellog = async(req,res) =>{
             
         }else if(id ==='month'){
 
-            const month = '2022-07-19'
+            const month = req.body.date
 
             const anyMonthData = await level.aggregate([
                 {

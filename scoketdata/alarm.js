@@ -22,15 +22,14 @@ module.exports = (app) =>{
             chabjey = (flowrate[11] - (flowrate[12]+ flowrate[13])).toFixed(2)
             kst = (flowrate[13] - (flowrate[11] + flowrate[12])).toFixed(2)
             
-            loss = {"small_town":`${small_town}`,
-                    "RBP":`${rbp}`,"BHU":`${bhu}`,
-                    "School":`${school}`,
-                    "Main_Town":`${main_town}`,
-                    "Terrace":`${terrace}`,
-                    "Chabjey":`${chabjey}`,
-                    "KST":`${kst}`};
+            loss = {"small_town":small_town,
+                    "RBP":rbp,"BHU":bhu,
+                    "School":school,
+                    "Main_Town":main_town,
+                    "Terrace":terrace,
+                    "Chabjey":chabjey,
+                    "KST":kst};
 
-            // loss = [small_town,rbp,bhu,school,main_town,terrace,chabjey,kst];
             flowrate.splice(0);  
             socket.emit("message",JSON.stringify(loss));
         });
