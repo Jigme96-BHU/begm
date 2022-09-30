@@ -4,7 +4,7 @@ var flowrate = [];
 module.exports = (app) =>{
 
     app.io.on('connection',(socket)=>{
-        client.subscribe("GCIT/FLOWDATA");""
+        client.subscribe("GCIT/FLOWDATA");
     
         client.on('message',(topic,message)=>{
             data = JSON.parse(message);

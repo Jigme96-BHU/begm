@@ -27,7 +27,7 @@ exports.valvelist = async (req,res) =>{
     }
 }
 
-exports.specific = async(req,res) =>{
+exports.specific = async (req,res) =>{
     try{
         const data = await req.body
         let response = await valve.find({'node_name':data.node_name, 'valve_name': data.valve_name});
@@ -36,3 +36,4 @@ exports.specific = async(req,res) =>{
         console.log("Error fetching data from database"+ error);
     }
 }
+
