@@ -9,7 +9,7 @@ module.exports = (app) =>{
         client.on('message',(topic,message)=>{
             data = JSON.parse(message);
             for (let i = 0; i < data.doc_num; i++) {
-                var node_data = data[`doc_${i+1}`];
+                var node_data = data[`d_${i+1}`];
                 flowrate.push(node_data.flow_rate);
             };
             

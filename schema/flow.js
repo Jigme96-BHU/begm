@@ -1,13 +1,8 @@
 const Mongoose = require("mongoose");
 
 const flowSchema = new Mongoose.Schema({
-    node_name:{
-        type: String,
-        required: true,
-    },
-    TIME:{
+    time:{
         type:String,
-        required: true,
     },
     flow_name:{
         type:String,
@@ -15,15 +10,12 @@ const flowSchema = new Mongoose.Schema({
     },
     flow_rate:{
         type: String,
-        required: true,
     },
     total_flow:{
         type:String,
-        required:true,
     },
-    voltage:{
+    valve_position:{
         type:String,
-        required:true,
     }
 },{
     timestamps: true

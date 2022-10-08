@@ -1,27 +1,6 @@
 const User = require("../schema/user");
 const PasswordReset = require("../schema/forgotPassword");
-
 const bycrpt = require('bcryptjs');
-
-exports.deleteUser = async (req,res) =>{
-    const { id } = req.params
-    await User.findByIdAndDelete(id);
-}
-
-exports.forgotPassword = async (req,res) =>{
-    const { email } = req.body;
-    newEmail = email;
-    const exist = await User.findOne({email: email});
-    if(!!exist){
-        sendResetEmail(exist.id,email,res);
-    }else{
-        return res.json({
-            message: "Email does not exist",
-            value: "false"
-        })
-    }
-}
-
 exports.register = async (req,res) =>{
     const {email, password } = req.body;
 

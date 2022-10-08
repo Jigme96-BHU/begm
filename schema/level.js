@@ -1,13 +1,8 @@
 const Mongoose = require("mongoose");
 
 const levelSchema = new Mongoose.Schema({
-    node_name:{
-        type: String,
-        required: true,
-    },
-    TIME:{
+    time:{
         type:String,
-        required: true,
     },
     level_name:{
         type:String,
@@ -15,7 +10,6 @@ const levelSchema = new Mongoose.Schema({
     },
     level:{
         type:String,
-        required:true,
     }
 },{
     timestamps: true
