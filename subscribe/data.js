@@ -11,7 +11,6 @@ const mqttdata = async () => {
         try {
 
             data = JSON.parse(message);
-            console.log(data);
             for (let i = 0; i < data.doc_num; i++) {
                 var node_data = data[`d_${i+1}`];
                 flow.create(

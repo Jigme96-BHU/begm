@@ -1,6 +1,19 @@
 const mongodb = require("../server_conn/db");
 const valve = require('../schema/valve');
 
+exports.insertValve = async (req , res) =>{
+    try {
+        const data = await req.body;
+        console.log(data);
+        valve.create(
+            data,
+        )
+        res.send("OK");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.valve = async (req,res) =>{
     try {
         const data = await req.body;

@@ -19,4 +19,5 @@ router.get('/valvelist', valveController.valvelist);
 router.post('/specific', valveController.specific);
 router.post('/login', userController.login);
 router.post('/register',userController.register);
+router.post('/insertValve',valveController.insertValve)
 module.exports = router;
