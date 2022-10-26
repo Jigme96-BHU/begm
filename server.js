@@ -12,13 +12,13 @@ const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser")
 
 
-app.io = require('socket.io')(server,{cors:{origin:"*"}});
+app.io = require('socket.io')(server, { cors: { origin: "*" } });
 require('./scoketdata/alarm')(app)
 
 app.use(
     cors({
         origin: process.env.REACTSERVER,
-        methods:["GET","POST"],
+        methods: ["GET", "POST"],
         Credential: true,
     })
 );
@@ -27,33 +27,33 @@ app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
-dotenv.config({ path: './.env'});
+dotenv.config({ path: './.env' });
 const port = process.env.PORT;
 
 
-app.use(express.static(path.join(__dirname,'views')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 mongodb();
 
-client.on('connect',()=>{
+client.on('connect', () => {
     console.log("MQTT Broker Connected");
 
 });
 
-client.on('error',(err)=>{
-    console.log('Error connecting to MQTT Broker'+ err);
+client.on('error', (err) => {
+    console.log('Error connecting to MQTT Broker' + err);
 });
 
 mqttdata();
 
 app.use('/data', require('./routes/auth'));
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.render("./views/index.html");
 })
-server.listen(port,()=>{
+server.listen(port, () => {
     console.log(`Server started on port ${port}`)
 });
 

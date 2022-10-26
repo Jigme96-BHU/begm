@@ -5,12 +5,12 @@ const Mongoose = require("mongoose");
 // const dbname = 'gyelopzhing';
 
 const connectDB = async () => {
-    await Mongoose.connect(process.env.MONGO_URL,{
+    await Mongoose.connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(()=> console.log("Databased Connected"))
-    .catch(err=>console.log(err));
+        .then(() => console.log("Databased Connected"))
+        .catch(err => console.log(err));
 
 };
 module.exports = connectDB;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Document</title>
     <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
+
 <body>
     <div id="mydiv">
     </div>
@@ -14,10 +16,11 @@
     <script>
         const socket = io('http://localhost:5001');
         socket.on('connection')
-        socket.on('message',(data)=>{
+        socket.on('message', (data) => {
             console.log(data);
         })
     </script>
-    
+
 </body>
-</html>
+
+</html>sx

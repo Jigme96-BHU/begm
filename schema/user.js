@@ -2,7 +2,7 @@ const Mongoose = require("mongoose");
 
 const UserSchema = new Mongoose.Schema(
     {
-        email:{
+        email: {
             type: String,
             unique: true,
             required: true,
@@ -10,12 +10,12 @@ const UserSchema = new Mongoose.Schema(
         },
         hashedPassword: {
             type: String,
-            minlength:6,
+            minlength: 6,
             required: true,
         },
-    },{
-        timestamps: true,
-    }
+    }, {
+    timestamps: true,
+}
 );
 
 const User = Mongoose.model("User", UserSchema);

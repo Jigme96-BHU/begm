@@ -1,7 +1,7 @@
 const mongodb = require("../server_conn/db");
 const valve = require('../schema/valve');
 
-exports.insertValve = async (req , res) =>{
+exports.insertValve = async (req, res) => {
     try {
         const data = await req.body;
         console.log(data);
@@ -14,39 +14,39 @@ exports.insertValve = async (req , res) =>{
     }
 }
 
-exports.valve = async (req,res) =>{
+exports.valve = async (req, res) => {
     try {
         const data = await req.body;
 
-        await valve.findOneAndUpdate({'node_name':data.node_name , 'valve_name': data.valve_name},{'valve_percent':data.valve_percent, 'valve_status':data.valve_status }, {new:true},(error,data)=>{
-            if(error){
+        await valve.findOneAndUpdate({ 'node_name': data.node_name, 'valve_name': data.valve_name }, { 'valve_percent': data.valve_percent, 'valve_status': data.valve_status }, { new: true }, (error, data) => {
+            if (error) {
                 console.log(error);
-            }else{
+            } else {
                 console.log(data);
             }
         })
         console.log("data Inserted");
     } catch (error) {
-        console.log("Error updating data in database"+ error);
+        console.log("Error updating data in database" + error);
     }
 }
 
-exports.valvelist = async (req,res) =>{
+exports.valvelist = async (req, res) => {
     try {
         const data = await valve.find();
-        res.status(200).json({status:true,data:data});
+        res.status(200).json({ status: true, data: data });
     } catch (error) {
-        console.log("Error fetching data from database"+ error);
+        console.log("Error fetching data from database" + error);
     }
 }
 
-exports.specific = async (req,res) =>{
-    try{
-        const data = await req.body
-        let response = await valve.find({'node_name':data.node_name, 'valve_name': data.valve_name});
-        res.status(200).json({data:response[0]});
-    }catch(error){
-        console.log("Error fetching data from database"+ error);
+exports.specific = async (req, res) => {
+    try {
+        const data = await req.body;
+        let response = await valve.find({ 'node_name': data.node_name, 'valve_name': data.valve_name });
+        res.status(200).json({ data: response[0] });
+    } catch (error) {
+        console.log("Error fetching data from database" + error);
     }
 }
 
