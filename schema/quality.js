@@ -3,7 +3,6 @@ const Mongoose = require("mongoose");
 const qualitySchema = new Mongoose.Schema({
     Quality_name: {
         type: String,
-        required: true,
     },
     time: {
         type: String,
@@ -11,7 +10,6 @@ const qualitySchema = new Mongoose.Schema({
     },
     value: {
         type: String,
-        required: true,
     },
 }, {
     timestamps: true

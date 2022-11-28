@@ -11,13 +11,13 @@ const bodyParser = require('body-parser');
 const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser")
 
-
 app.io = require('socket.io')(server, { cors: { origin: "*" } });
+
 require('./scoketdata/alarm')(app)
 
 app.use(
     cors({
-        origin: process.env.REACTSERVER,
+        origin: "*",
         methods: ["GET", "POST"],
         Credential: true,
     })
