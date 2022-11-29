@@ -7,4 +7,4 @@ const ForgotPasswordsSchema = new mongoose.Schema({
     expiresAt: Date,
 });
 
-module.exports = mongoose.model("PasswordReset",ForgotPasswordsSchema);
+module.exports = mongoose.model("PasswordReset", ForgotPasswordsSchema);

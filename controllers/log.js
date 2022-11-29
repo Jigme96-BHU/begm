@@ -118,7 +118,7 @@ exports.levellog = async (req, res) => {
     }
 }
 
-exports.qualitylog = async(req,res) =>{
+exports.qualitylog = async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -168,11 +168,11 @@ exports.qualitylog = async(req,res) =>{
 
             res.status(200).json(anyMonthData);
         }
-        
-        
+
+
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
