@@ -25,6 +25,7 @@ exports.flowlog = async (req, res) => {
         } else if (id === 'anyday') {
 
             const date = req.body.date
+            console.log(data);
 
             const anyDayData = await flow.aggregate([
                 {

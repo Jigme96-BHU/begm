@@ -22,7 +22,7 @@ exports.valve = async (req, res) => {
             if (error) {
                 console.log(error);
             } else {
-                console.log(data);
+                res.status(200).json({status: true})
             }
         })
         console.log("data Inserted");
