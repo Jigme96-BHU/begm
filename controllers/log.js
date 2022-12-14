@@ -24,20 +24,26 @@ exports.flowlog = async (req, res) => {
 
         } else if (id === 'anyday') {
 
-            const date = req.body.date
-            console.log(data);
+            const today = req.body.date
 
-            const anyDayData = await flow.aggregate([
-                {
-                    $match: {
-                        $expr: {
-                            $eq: [{ $dayOfYear: '$createdAt' }, { $dayOfYear: new Date(`${date}`) }],
-                        },
-                    }
-                }
-            ])
+            // const anyDayData = await flow.aggregate([
+            //     {
+            //         $match: {
+            //             $expr: {
+            //                 $eq: [{ $dayOfYear: '$createdAt' }, { $dayOfYear: new Date(`${date}`) }],
+            //             },
+            //         }
+            //     }
+            // ])
 
-            res.status(200).json(anyDayData);
+            flow.find({date: today}).exec(function(err,result){
+                if(err) throw err;
+                res.status(200).json(result);
+            })
+
+
+           
+
 
         } else if (id === 'month') {
 
