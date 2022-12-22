@@ -29,13 +29,13 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-dotenv.config({ path: './.env' });
+dotenv.config({ path: "./.env" });
 const port = process.env.PORT;
 
 
 app.use(express.static(path.join(__dirname, 'views')));
 
-mongodb();
+        mongodb();
 
 client.on('connect', () => {
     console.log("MQTT Broker Connected");

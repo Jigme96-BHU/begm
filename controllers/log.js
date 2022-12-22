@@ -6,21 +6,28 @@ const quality = require("../schema/quality");
 exports.flowlog = async (req, res) => {
     try {
 
+        const {flow_name} = req.body
         const id = req.params.id;
 
         if (id === 'weekly') {
 
+
+            console.log(flow_name)
             const date = req.body.date;
 
-            const weekData = await flow.aggregate(
-                [{
-                    $match: {
-                        $expr: {
-                            $eq: [{ $dayOfWeek: '$createdAt' }, { $dayOfWeek: new Date() }],
-                        },
-                    }
-                }])
-            res.status(200).json(weekData);
+            const weekData = await flow.find(
+
+            {
+                $and: [
+                    { flow_name: flow_name },
+                    { $expr: { $eq:[{ $dayOfWeek: '$createdAt' }, { $dayOfWeek: new Date(date) }] } }
+                 ]}
+
+               
+                
+                )
+                
+            res.status(200).json({weekData});
 
         } else if (id === 'anyday') {
 
@@ -36,9 +43,9 @@ exports.flowlog = async (req, res) => {
             //     }
             // ])
 
-            flow.find({date: today}).exec(function(err,result){
+            flow.find({$and:[{flow_name},{date: today}]}).exec(function(err,result){
                 if(err) throw err;
-                res.status(200).json(result);
+                res.status(200).json({result});
             })
 
 
@@ -49,74 +56,114 @@ exports.flowlog = async (req, res) => {
 
             const date = req.body.date
 
-            const anyMonthData = await flow.aggregate([
+            const anyMonthData = await flow.find(
+                
+                
                 {
-                    $match: {
-                        $expr: {
-                            $eq: [{ $month: '$createdAt' }, { $month: new Date(`${date}`) }],
-                        },
-                    }
-                }
-            ])
+                    $and: [
+                        { flow_name: flow_name },
+                        { $expr: { $eq:[{ $month: '$createdAt' }, { $month: new Date(`${date}`) }] } }
+                    ]}
+            //     [
+            //     {
+            //         $match: {
+            //             $expr: {
+            //                 $eq: [{ $month: '$createdAt' }, { $month: new Date(`${date}`) }],
+            //             },
+            //         }
+            //     }
+            // ]
+            
+            
+            )
 
-            res.status(200).json(anyMonthData);
+            res.status(200).json({anyMonthData});
         }
 
     } catch (error) {
         console.log(error);
     }
 }
+
+
+
+
+
+
+
 
 
 exports.levellog = async (req, res) => {
+    
     try {
+                const {level_name} = req.body
+
+
         const id = req.params.id;
 
         if (id === 'weekly') {
 
             const date = req.body.date
 
-            const weeklydata = await level.aggregate(
-                [{
-                    $match: {
-                        $expr: {
-                            $eq: [{ $dayOfWeek: '$createdAt' }, { $dayOfWeek: new Date() }],
-                        },
-                    }
-                }])
-            res.status(200).json(weeklydata);
+             level.find(
+              
+                {
+                    $and: [
+                        { level_name: level_name },
+                        { $expr: { $eq:[{ $dayOfWeek: '$createdAt' }, { $dayOfWeek: new Date(date) }] } }
+                     ]}
+
+                
+                
+                ).exec((err,weeklydata)=>{
+                    res.status(200).json({weeklydata});
+
+                })
 
         } else if (id === 'anyday') {
 
             const date = req.body.date
 
-            const anyDayData = await level.aggregate([
-                {
-                    $match: {
-                        $expr: {
-                            $eq: [{ $dayOfYear: '$createdAt' }, { $dayOfYear: new Date(`${date}`) }],
-                        },
-                    }
-                }
-            ])
+            // level.find(
+                
+            //     [
+            //     {
+            //         $match: {
+            //             $expr: {
+            //                 $eq: [{ $dayOfYear: '$createdAt' }, { $dayOfYear: new Date(`${date}`) }],
+            //             },
+            //         }
+            //     }
+            // ]
 
-            res.status(200).json(anyDayData);
+
+            level.find({$and:[{level_name},{date}]}).exec(function(err,anyDayData){
+                if(err) throw err;
+                res.status(200).json({anyDayData});
+            })
+
+            
+            
+           // )
+
+           // res.status(200).json(anyDayData);
 
         } else if (id === 'month') {
 
             const month = req.body.date
 
-            const anyMonthData = await level.aggregate([
+            level.find(
+                
                 {
-                    $match: {
-                        $expr: {
-                            $eq: [{ $month: '$createdAt' }, { $month: new Date(`${month}`) }],
-                        },
-                    }
-                }
-            ])
+                    $and: [
+                        { level_name: level_name },
+                        { $expr: { $eq:[{ $month: '$createdAt' }, { $month: new Date(`${month}`) }] } }
+                    ]}
+            ).exec((err,anyMonthData)=>{
+                res.status(200).json({anyMonthData});
 
-            res.status(200).json(anyMonthData);
+            })
+
         }
 
     } catch (error) {
@@ -124,55 +171,68 @@ exports.levellog = async (req, res) => {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.qualitylog = async (req, res) => {
     try {
+
+        const {Quality_name}= req.body
         const id = req.params.id;
+
 
         if (id === 'weekly') {
 
             const date = req.body.date
 
-            const weeklydata = await quality.aggregate(
-                [{
-                    $match: {
-                        $expr: {
-                            $eq: [{ $dayOfWeek: '$createdAt' }, { $dayOfWeek: new Date() }],
-                        },
-                    }
-                }])
-            res.status(200).json(weeklydata);
+             quality.find(
+                {
+                    $and: [
+                        { Quality_name: Quality_name },
+                        { $expr: { $eq:[{ $dayOfWeek: '$createdAt' }, { $dayOfWeek: new Date(date) }] } }
+                     ]}
+
+                
+                ).exec((err,weeklydata)=>{
+                    res.status(200).json(weeklydata);
+
+                })
 
         } else if (id === 'anyday') {
 
             const date = req.body.date
 
-            const anyDayData = await quality.aggregate([
-                {
-                    $match: {
-                        $expr: {
-                            $eq: [{ $dayOfYear: '$createdAt' }, { $dayOfYear: new Date(`${date}`) }],
-                        },
-                    }
-                }
-            ])
+            quality.find({$and:[{Quality_name:Quality_name},{date}]}).exec((err,anyDayData)=>{
+                res.status(200).json(anyDayData);
 
-            res.status(200).json(anyDayData);
+            })
+
 
         } else if (id === 'month') {
 
             const month = req.body.date
 
-            const anyMonthData = await quality.aggregate([
-                {
-                    $match: {
-                        $expr: {
-                            $eq: [{ $month: '$createdAt' }, { $month: new Date(`${month}`) }],
-                        },
-                    }
-                }
-            ])
+            quality.find(  {
+                $and: [
+                    { Quality_name: Quality_name },
+                    { $expr: { $eq:[{ $month: '$createdAt' }, { $month: new Date(`${month}`) }] } }
+                ]}).exec((err,anyMonthData)=>{
+             
+                    res.status(200).json(anyMonthData);
 
-            res.status(200).json(anyMonthData);
+                })
+
+
         }
 
 

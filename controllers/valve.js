@@ -4,7 +4,7 @@ const valve = require('../schema/valve');
 exports.insertValve = async (req, res) => {
     try {
         const data = await req.body;
-        console.log(data);
+        //console.log(data);
         valve.create(
             data,
         )
